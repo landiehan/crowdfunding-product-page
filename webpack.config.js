@@ -7,7 +7,21 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    rules: [{ test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ }]
+    rules: [
+      { 
+        test: /\.js$/, 
+        use: 'babel-loader', 
+        exclude: /node_modules/ 
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
+    ]
   },
   plugins: [new HtmlWebpackPlugin({
     template: path.resolve(__dirname, 'public/index.html')
