@@ -70,28 +70,13 @@ const BackTrigger = styled.button`
   font-family: inherit;
   font-size: inherit;
   cursor: pointer;
+  &:hover {
+    background-color: ${props => props.theme.darkCyan};
+  }
 `;
 
-const BookmarkLabel = styled.label`
-  display: flex;
-  svg {
-    display: block;
-  };
-  @media only screen and (min-width: 576px) {
-    & {
-      background-color: #f4f4f4;
-      border-radius: 9999px;
-    }
-    &::after {
-      content: 'Bookmark';
-      line-height: 56px;
-      margin-left: 1rem;
-      margin-right: 3rem;
-      font-weight: 700;
-      color: #777777;
-    }
-    cursor: pointer;
-  }
+const BookmarkSwitcherContainer = styled.div`
+  position: relative;
 `;
 
 const VisuallyHidden = css`
@@ -107,16 +92,55 @@ const VisuallyHidden = css`
 `
 
 const BookmarkInput = styled.input.attrs({
-  type: 'checkbox'
+  type: 'checkbox',
+  id: 'bookmark-input'
 })`
   ${VisuallyHidden}
 `;
 
+const BookmarkLabel = styled.label.attrs({
+  for: 'bookmark-input'
+})`
+  display: flex;
+  svg {
+    display: block;
+    ${BookmarkInput}:checked + & circle {
+      fill: ${props => props.theme.darkCyan};
+    };  
+    ${BookmarkInput}:checked + & path {
+      fill: white;
+    };
+  };
+  @media only screen and (min-width: 576px) {
+    & {
+      background-color: #f4f4f4;
+      border-radius: 9999px;
+      ${BookmarkInput}:checked + & {
+        background-color: #f4f8f9;
+      }      
+    }
+
+    &::after {
+      content: 'Bookmark';
+      line-height: 56px;
+      margin-left: 1rem;
+      margin-right: 3rem;
+      font-weight: 700;
+      color: #777777;
+      ${BookmarkInput}:checked + & {
+        content: 'Bookmarked';
+        color: #3a7c7a;
+      }
+    }
+    cursor: pointer;
+  }
+`;
+
 const BookmarkSwitcher = () => (
-  <BookmarkLabel>
-    {iconBookmark}
+  <BookmarkSwitcherContainer>
     <BookmarkInput />
-  </BookmarkLabel>
+    <BookmarkLabel>{iconBookmark}</BookmarkLabel>    
+  </BookmarkSwitcherContainer>
 )
 
 export default function Intro() {
