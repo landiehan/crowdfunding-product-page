@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import styled from 'styled-components';
 import heroMobile from './image-hero-mobile.jpg';
 import heroDesktop from './image-hero-desktop.jpg';
+import Intro from '../components/Intro';
 
 const Container = styled.div`
   background-image: url(${heroMobile});
@@ -13,6 +14,7 @@ const Container = styled.div`
     background-image: url(${heroDesktop});
   }
   min-height: 100vh;
+  background-color: #fafafa;
 `;
 
 export default function App() {
@@ -20,6 +22,7 @@ export default function App() {
     <Theme>
       <Container>
         <Header />
+        <Intro />
       </Container>
     </Theme>
   );
